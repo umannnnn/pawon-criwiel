@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    scroll-behavior: smooth;
+}
+
+.bg-black {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+.bg-footer {
+    background-image: url("/public/img/background.jpeg");
+}
+
+.bg-image {
+    background-image: url("http://source.unsplash.com/1920x1080?background-black");
+    background-attachment: fixed;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.video-section-container {
+    /* position: relative;
+    width: 100%; /* Adjust as necessary */
+    height: auto; /* Adjust based on the video aspect ratio or as necessary */
+}
+
+/* Dropdown Styles */
+.dropdown-menu {
+    display: none; /* Sembunyikan secara default */
+    position: absolute; /* Posisikan dropdown secara absolut */
+    left: 0; /* Mulai dari kiri */
+    z-index: 10; /* Pastikan dropdown muncul di atas konten lain */
+    width: max-content; /* Sesuaikan lebar dengan konten */
+}
+
+.group:hover .dropdown-menu {
+    display: block; /* Tampilkan saat di-hover */
+}
+
+/* Tambahkan sedikit styling untuk hover state */
+.dropdown-menu a:hover {
+    background-color: #4b5563; /* Warna background saat di-hover */
+}
+
+
+.menu-item {
+    position: relative;
+    overflow: hidden; /* Memastikan pseudo-element tidak melebihi batas */
+}
+
+.menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-item:hover::after {
+    transform: translateX(0);
+}
+
+/* Container style */
+.bg-white.rounded.shadow.dark\:bg-gray-800 {
+    position: relative;
+    overflow: hidden; /* Pastikan konten tidak melebihi batas */
+    width: 100%; /* Atur lebar container sesuai kebutuhan */
+}
+
+/* Style untuk gambar */
+.bg-white.rounded.shadow.dark\:bg-gray-800 img {
+    width: 100%;
+    height: 400px;
+    display: block; /* Hilangkan ruang putih di bawah gambar */
+    transition: transform 0.5s ease; /* Efek zoom saat hover */
+}
+
+/* Judul dengan posisi absolut */
+.bg-white.rounded.shadow.dark\:bg-gray-800 h3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Background hitam dengan opacity 50% */
+    color: white;
+    margin: 0; /* Hapus margin default */
+    padding: 10px 0; /* Tambahkan padding atas bawah */
+    text-align: center; /* Teks berada di tengah */
+}
+
+/* Deskripsi */
+.bg-white.rounded.shadow.dark\:bg-gray-800 p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%); /* Sembunyikan di bawah container */
+    transition: transform 0.5s ease; /* Efek transisi untuk muncul */
+    background: rgba(0, 0, 0, 0.8); /* Lebih gelap dari judul */
+    color: white;
+    margin: 0; /* Hapus margin default */
+    padding: 10px 0; /* Tambahkan padding atas bawah */
+    text-align: center; /* Teks berada di tengah */
+    opacity: 0; /* Awalnya transparan */
+}
+
+/* Efek hover pada container */
+.bg-white.rounded.shadow.dark\:bg-gray-800:hover img {
+    transform: scale(1.05); /* Efek zoom kecil */
+}
+
+.bg-white.rounded.shadow.dark\:bg-gray-800:hover p {
+    transform: translateY(0); /* Tampilkan deskripsi */
+    opacity: 1; /* Buat deskripsi muncul */
+}
+
+/* Media query untuk perangkat seluler */
+@media (max-width: 767px) {
+    .bg-white.rounded.shadow.dark\:bg-gray-800 {
+        padding: 0; /* Hilangkan padding di perangkat seluler */
+    }
+}
+
+.gallery-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #ccc; /* Ganti warna latar belakang sesuai kebutuhan */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.gallery-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Warna overlay hitam transparan */
+    opacity: 0; /* Mulai dengan keadaan tidak terlihat */
+    transition: opacity 0.3s ease; /* Efek transisi */
+}
+
+.gallery-container:hover .overlay {
+    opacity: 1; /* Tampilkan overlay saat elemen dihover */
+}
+
+.gallery-container .delete-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Mulai dengan tombol delete tersembunyi */
+}
+
+.gallery-container:hover .delete-form {
+    display: block; /* Tampilkan tombol delete saat elemen dihover */
+}
+
+.gallery-container .delete-button {
+    background-color: red; /* Warna tombol delete */
+    color: white; /* Warna teks tombol delete */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Efek transisi */
+}
+
+.gallery-container .delete-button:hover {
+    background-color: darkred; /* Warna tombol delete saat dihover */
+}
+
+.active-tab {
+    color: #2563eb;
+    border-color: #2563eb;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .absolute.inset-0 {
+        display: none;
+    }
+}
