@@ -187,7 +187,6 @@ html{
     border-color: #2563eb;
 }
 
-
 @media only screen and (max-width: 768px) {
     .absolute.inset-0 {
         display: none;

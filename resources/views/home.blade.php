@@ -54,7 +54,7 @@
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white font-abc">Menu Andalan Pawon Criwiel</h2>
                 <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Temukan berbagai pilihan menu menarik, dari sajian klasik yang kaya akan keaslian rasa hingga inovasi kuliner yang menawarkan pengalaman rasa unik untuk memanjakan lidah Anda.</p>
             </div> 
-            <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
                 <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <img class="object-cover w-full rounded-l-xl h-96 md:h-auto md:w-48 md:rounded-r-none md:rounded-s-lg" src="/img/nasiKotakPawon.png" alt="">
                     <div class="flex flex-col justify-between p-4 leading-normal">

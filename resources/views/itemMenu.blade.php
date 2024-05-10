@@ -6,17 +6,17 @@
     <div class="py-8 px-4 mx-auto space-y-12 max-w-screen-xl lg:space-y-20 sm:py-16 lg:px-6">
         <!-- Row -->
         <div class="gap-8 items-center lg:grid lg:grid-cols-2 xl:gap-16">
-            <div style="max-height: 450px; max-width: 800px; overflow:hidden">
+            <div class="max-h-450px max-w-800px overflow-hidden">
                 @if($menu->image)
                     @php
                         $images = json_decode($menu->image, true);
                     @endphp
-                    <!-- Display only the first image -->
+                    <!-- Display only the first image on larger screens (laptop/desktop) -->
                     @if(count($images) > 0)
-                        <img class="p-8 mb-4 w-full lg:mb-0 lg:flex rounded-lg hidden sm:block" src="{{ asset('storage/' . $images[0]) }}">
+                        <img class="p-8 mb-4 w-full lg:mb-0 lg:flex rounded-lg hidden md:block" src="{{ asset('storage/' . $images[0]) }}">
                     @endif
                 @endif
-            </div>
+            </div>           
             <div class="text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white font-abc">{{ $menu->title }}</h2>
                 <p class="mb-8 lg:text-xl text-justify">{{ $menu->body }}</p>
@@ -135,7 +135,7 @@
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white font-abc">Pilihan Menu Lainya</h2>
             <p class="text-gray-500 sm:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, quo cupiditate accusamus autem minus consectetur, quis sit, temporibus sapiente perferendis</p>
         </div>
-        <div class="space-y-8 md:grid md:grid-cols-3 lg:grid-cols-3 md:gap-12 md:space-y-0">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($additionalMenus as $additionalMenu)
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="{{ route('menu.show', $additionalMenu->slug) }}">

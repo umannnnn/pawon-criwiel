@@ -31,7 +31,7 @@ class OrderController extends Controller
             'name' => 'required|min:3|max:255',
             'customer' => 'required|min:3|max:255',
             'address' => 'required|min:3|max:255',
-            'phone' => 'required|min:3|max:255',
+            'phone' => 'required|min:3|max:13',
             'desc' => 'required|min:3|max:255'
         ]);
 

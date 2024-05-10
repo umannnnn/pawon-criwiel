@@ -73,7 +73,7 @@
                 <a href="/menu?category={{ $category->slug }}" class="px-4 py-2 my-2 mx-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-full dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-500">{{ $category->name }}</a>
             @endforeach
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             @if ($menus->count() === 0)
                 <h2 class="font-abc mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Tidak ada menu</h2>
             @else

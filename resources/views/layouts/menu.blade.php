@@ -18,7 +18,7 @@
     <header>
         <nav class="bg-footer w-full z-20">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="" class="flex items-center">
+                <a href="/" class="flex items-center">
                     <img src="/img/logoPawonCriwiel.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap text-white font-abc">Pawon Criwiel</span>
                 </a>
