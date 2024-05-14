@@ -73,7 +73,7 @@ class AdminCategoryController extends Controller
 
         $category->update($validateData);
 
-        return redirect('/dashboard/categories');
+        return redirect('/dashboard/categories')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**

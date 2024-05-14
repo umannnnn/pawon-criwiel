@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title }}</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
+    <link rel="shortcut icon" href="/img/logoPawonCriwiel.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

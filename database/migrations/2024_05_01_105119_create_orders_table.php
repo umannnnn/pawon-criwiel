@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('desc');
-            $table->boolean('status')->default(false);
+            $table->string('price')->nullable();
+            $table->enum('status', ['Menunggu konfirmasi', 'Dikonfirmasi', 'Sedang diproses', 'Selesai'])->default('Menunggu konfirmasi');
             $table->string('payment_proof')->nullable();
             $table->timestamps();
         });

@@ -43,12 +43,13 @@
                     @endif
                     @foreach ($orders as $order)
                     <div class="order-item rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6
-                        @if ($order->status == '0')
+                        @if ($order->status == 'Menunggu konfirmasi')
                             belum-bayar
-                        @elseif ($order->status == '1' && $order->payment_proof == null)
+                        @elseif ($order->status == 'Dikonfirmasi')
                             dikonfirmasi
-                        @endif
-                        @if ($order->payment_proof != null)
+                        @elseif ($order->status == 'Sedang diproses')
+                            sedang-diproses
+                        @elseif ($order->status == 'Selesai')
                             selesai
                         @endif
                         ">
@@ -56,12 +57,13 @@
                             <label for="counter-input" class="sr-only">Choose quantity:</label>
                             <div class="flex items-center justify-between md:order-3 md:justify-end">
                                 <div class="text-end">
-                                    @if ($order->status == '0')
+                                    @if ($order->status == 'Menunggu konfirmasi')
                                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Pesanan Belum Dikonfirmasi</span>
-                                    @elseif ($order->status == '1' && $order->payment_proof === null)
+                                    @elseif ($order->status == 'Dikonfirmasi')
                                     <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Pesanan Dikonfirmasi</span>
-                                    @endif
-                                    @if ($order->payment_proof != null)
+                                    @elseif ($order->status == 'Sedang diproses')
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-purple-300 border border-purple-300">Pesanan Sedang Diproses</span>
+                                    @elseif ($order->status == 'Selesai')
                                     <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-300 border border-blue-300">Pesanan Selesai</span>
                                     @endif
                                 </div>
@@ -71,7 +73,13 @@
                                 <p class="text-sm text-gray-500 dark:text-gray-400">{{ $order->desc }}</p>
                                 <div class="flex items-center gap-4">
                                     <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 mb-4 px-3 py-3 rounded-full dark:bg-gray-700 dark:text-gray-300">Invoice : {{ $order->invoice }}</span>
-                                    @if ($order->status == '0')
+                                    @if ($order->status == 'Dikonfirmasi' && $order->payment_proof === null)
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 mb-4 px-3 py-3 rounded-full dark:bg-gray-700 dark:text-gray-300">Total : Rp {{ number_format($order->price, 0, ',', '.') }}</span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium me-2 mb-4 px-3 py-3 rounded-full dark:bg-gray-700 dark:text-red-300">Belum Dibayar</span>
+                                    @elseif ($order->status == 'Dikonfirmasi' && $order->payment_proof !== null)
+                                    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 mb-4 px-3 py-3 rounded-full dark:bg-gray-700 dark:text-green-400">Sudah Dibayar</span>
+                                    @endif
+                                    @if ($order->status == 'Menunggu konfirmasi')
                                     <form action="/order/{{ $order->id }}" method="post" class="delete-form flex items-center gap-4">
                                         @csrf
                                         @method('delete')
@@ -94,14 +102,14 @@
                     @if ($orders->isEmpty())
                     <p class="text-base font-medium text-gray-900 dark:text-white">Tidak ada pesanan</p>
                     @else
-                    <form action="/order/{{ $order->id }}/payment" method="post" enctype="multipart/form-data">
+                    <form class="confirm-form" action="/order/{{ $order->id }}/confirm" method="post" enctype="multipart/form-data">
                         @method('put')
                         @csrf
                         <div class="space-y-4">
                             <label for="order" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih Pesanan</label>
                             <select id="order" name="order" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($orders as $order)
-                                    @if ($order->status == '1' && $order->payment_proof === null)
+                                    @if ($order->status == 'Dikonfirmasi' && $order->payment_proof === null && $order->price !== null)
                                         <option value="{{ $order->id }}">{{ $order->invoice }}</option>
                                     @endif                            
                                 @endforeach
@@ -151,10 +159,10 @@
                             <div class="p-4 md:p-5 space-y-4">
                                 <ul class="space-y-4 text-gray-500 list-disc list-inside dark:text-gray-400">
                                     <li>
-                                        Menunggu Konfirmasi
+                                        Belum Dikonfirmasi
                                         <ol class="ps-5 mt-2 space-y-1 list-decimal list-inside">
                                             <li>Pada tahap ini pesanan anda sedang dalam pengecekan oleh admin</li>
-                                            <li>Pesanan akan segera dikonfirmasi oleh admin</li>
+                                            <li>Pesanan akan segera dikonfirmasi oleh admin apabila pesanan memungkinakan untuk diproses</li>
                                             <li>Pesanan masih dapat dibatalkan apabila terdapat kesalahan</li>
                                         </ol>
                                     </li>
@@ -162,17 +170,25 @@
                                         Dikonfirmasi
                                         <ul class="ps-5 mt-2 space-y-1 list-decimal list-inside">
                                             <li>Pada tahap ini pesanan anda sudah dikonfirmasi oleh admin</li>
-                                            {{-- <li>Pesanan anda tidak dapat dibatalkan, silahkan menghubungi admin apabila terdapat kesalahan</li> --}}
-                                            <li>Selanjutnya detail invoice akan dikirimkan melalui email</li>
-                                            <li>Apabila detail invoice sudah diterima, silahkan melakukan pembayaran</li>
+                                            <li>Tunggu hingga admin menambahkan total harga yang harus dibayar</li>
+                                            <li>Anda diharapkan untuk segera melakukan pembayaran apabila total harga sudah muncul</li>
+                                            <li>
+                                                Pastikan bukti transfer yang diunggah sudah benar, Kesalahan dalam pembayaran dapat menyebabkan pesanan anda tidak diproses
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Sedang Diproses
+                                        <ul class="ps-5 mt-2 space-y-1 list-decimal list-inside">
+                                            <li>Pada tahap ini pesanan anda sedang diproses oleh pemilik catering</li>
+                                            <li>Proses pembuatan pesanan membutuhkan waktu, anda akan dihubungi melalui whatsapp atau email apabila pesanan sudah selesai</li>
+                                            <li>Anda diharapkan untuk tetap menghubungi admin apabila terdapat kendala</li>
                                         </ul>
                                     </li>
                                     <li>
                                         Selesai
                                         <ul class="ps-5 mt-2 space-y-1 list-decimal list-inside">
                                             <li>Pada tahap ini pesanan anda sudah selesai</li>
-                                            <li>Anda diharapkan untuk tetap menghubungi admin apabila terdapat kendala</li>
-                                            <li>Pesanan anda akan segera diproses</li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -216,6 +232,39 @@
         displayErrorMessage();
     });
 
+    const confirmForms = document.querySelectorAll('.confirm-form');
+
+    confirmForms.forEach(confirmForm => {
+        confirmForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: true
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: "Apakah Bukti Transfer Sudah Benar?",
+                text: "Anda tidak akan dapat mengembalikannya!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, kirim!",
+                cancelButtonText: "Tidak, batalkan!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Here you can put your AJAX request or form submission if you want to handle it separately
+                    confirmForm.submit(); // Submit form after confirmation
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    // Do nothing if the user cancels
+                }
+            });
+        });
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
         // Fungsi untuk menampilkan pesanan berdasarkan status
         function filterOrders(status) {
@@ -243,6 +292,11 @@
         document.getElementById('tab-dikonfirmasi').addEventListener('click', function() {
             filterOrders('dikonfirmasi');
             setActiveTab('tab-dikonfirmasi');
+        });
+
+        document.getElementById('tab-sedang-diproses').addEventListener('click', function() {
+            filterOrders('sedang-diproses');
+            setActiveTab('tab-sedang-diproses');
         });
 
         document.getElementById('tab-selesai').addEventListener('click', function() {

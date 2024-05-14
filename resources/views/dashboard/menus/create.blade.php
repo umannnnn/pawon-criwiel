@@ -77,8 +77,12 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                            <input id="body" name="body" type="hidden">
-                            <trix-editor input="body"></trix-editor>
+                            <textarea id="body" name="body" class="@error('body') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            @error ('body')
+                                <div class="mt-1 text-sm text-red-600 dark:text-red-500">
+                                    <span class="font-medium">Oops!</span> {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                     <button type="submit" id="sendMenus" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-gray-700 rounded-lg focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-900 hover:bg-gray-800">
@@ -131,7 +135,7 @@
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Silakan lengkapi semua kolom!",
+                text: "Pastikan semua kolom terisi dengan benar!",
             });
         } else {
             // Submit form secara manual

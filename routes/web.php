@@ -90,9 +90,12 @@ Route::delete('/dashboard/users/{user}', [AdminUserController::class, 'destroy']
 Route::get('/order', [OrderController::class, 'index'])->name('order.index');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 Route::delete('/order/{order}', [OrderController::class, 'destroy']);
-Route::put('/order/{order}/payment', [OrderController::class, 'payment']);
+Route::put('/order/{order}/confirm', [OrderController::class, 'confirm']);
 
 Route::get('/dashboard/orders', [AdminOrderController::class, 'index'])->middleware('isAdmin');
+Route::get('/dashboard/orders/print', [AdminOrderController::class, 'print'])->name('orders.print')->middleware('isAdmin');
 Route::put('/dashboard/orders/{order}/confirm', [AdminOrderController::class, 'confirm'])->middleware('isAdmin');
+Route::put('/dashboard/orders/{order}/process', [AdminOrderController::class, 'process'])->middleware('isAdmin');
+Route::put('/dashboard/orders/{order}/complete', [AdminOrderController::class, 'complete'])->middleware('isAdmin');
+Route::put('/dashboard/orders/{order}/price', [AdminOrderController::class, 'price'])->middleware('isAdmin');
 Route::delete('/dashboard/orders/{order}', [AdminOrderController::class, 'destroy'])->middleware('isAdmin');
-

@@ -38,6 +38,8 @@ class OrderController extends Controller
         // Create a new order
         $order = Order::create($validatedData);
 
+        $order->status = Order::STATUS_WAITING_CONFIRMATION;
+
         // Generate invoice number
         $invoiceNumber = 'INV-' . date('ym') . sprintf($order->id);
         
@@ -62,7 +64,7 @@ class OrderController extends Controller
         return redirect('/order')->with('success', 'Pesanan berhasil dibatalkan.');
     }
 
-    public function payment()
+    public function confirm()
     {
         // Ambil ID pesanan dari formulir
         $orderId = request('order');

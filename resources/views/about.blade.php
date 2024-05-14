@@ -64,15 +64,18 @@
     <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:px-6">
         <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
             <h2 class="mb-4 text-5xl tracking-tight font-extrabold text-white dark:text-white font-abc">Latar Belakang</h2>
-            <p class="mb-4 text-white dark:text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. At distinctio odit illo perferendis veniam autem temporibus, animi recusandae quis nisi facere quisquam sint velit in, laboriosam reiciendis esse modi inventore, consectetur molestiae sunt aut eligendi fugit!</p>
+            <p class="mb-4 text-white dark:text-white text-justify">Latar belakang Pawon Criwiel Catering bisa dirunut dari kisah perjalanan 
+                hidup Ibu Arien, pendirinya. Awalnya, pada tahun 2016, Ibu Arien pindah ke Purwokerto Jawa Tengah. Di sana, 
+                ia mulai menyalurkan minatnya dalam memasak dengan membuat pizza, yang kemudian menjadi cikal bakal dari bisnis kuliner yang ia kembangkan.</p>
         </div>
         <div class="mt-4 font-light text-white dark:text-white sm:text-lg lg:mt-0">
-            <p class="mb-4">Track work across the enterprise through an open, collaborative platform. Link issues
-                across Jira and ingest data from other software development tools, so your IT support and operations
-                teams have richer contextual information to rapidly respond to requests, incidents, and changes.</p>
-            <p>Deliver great service experiences fast - without the complexity of traditional ITSM
-                solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease, with a
-                complete audit trail for every change.</p>
+            <p class="mb-4 text-justify">Keahlian Ibu Arien dalam memasak tidak hanya terbatas pada pizza, 
+                tetapi juga mencakup masakan Jawa. Keterampilan ini kemungkinan besar diperolehnya 
+                melalui pengalaman dan eksplorasi selama tinggal di Purwokerto dan interaksi dengan teman-teman serta pelanggan lokal.
+            </p>
+            <p class="text-justify">Dengan berkembangnya minat dan permintaan dari teman-temannya, Arien akhirnya mulai menerima pesanan catering dan 
+                berbagai produk makanan lainnya. Ini menjadi awal dari Pawon Criwiel Catering, yang kemudian menjadi lebih dikenal 
+                melalui media sosial, terutama Facebook, di mana Arien dikenal dengan nama Arien Criwiel.</p>
         </div>
     </div>
 </section>

@@ -10,6 +10,14 @@
                     <h5 class="mr-3 text-lg font-semibold dark:text-white">Daftar Pesanan Pawon Criwiel</h5>
                     <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Berikut ini merupakan data pesanan yang masuk ke Pawon Criwiel</p>
                 </div>
+                <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                    <a href="{{ route('orders.print') }}" class="flex items-center justify-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-3.5 w-3.5 mr-2">
+                            <path fill-rule="evenodd" d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z" clip-rule="evenodd" />
+                        </svg>                          
+                        Print Pesanan
+                    </a>                    
+                </div>
             </div>
             <div class="overflow-x-auto  min-h-96">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -46,12 +54,13 @@
                                     {{ $order->invoice }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if ($order->status == '0')
+                                    @if ($order->status == 'Menunggu konfirmasi')
                                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">Belum Dikonfirmasi</span>
-                                    @elseif ($order->status == '1' && $order->payment_proof === null)
+                                    @elseif ($order->status == 'Dikonfirmasi')
                                     <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Dikonfirmasi</span>
-                                    @endif
-                                    @if ($order->payment_proof != null)
+                                    @elseif ($order->status == 'Sedang diproses')
+                                    <span class="bg-purple-100 text-purple-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-purple-300 border border-purple-300">Sedang Diproses</span>
+                                    @elseif ($order->status == 'Selesai')
                                     <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-300 border border-blue-300">Selesai</span>
                                     @endif
                                 </td>
@@ -66,7 +75,15 @@
                                             <li>
                                                 <a href="#" id="order-{{ $order->id }}-modal" data-modal-toggle="order-{{ $order->id }}-modal" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat deskripsi</a>
                                             </li>
-                                            @if ($order->status == '0')
+                                            <li>
+                                                <a href="https://wa.me/{{ $order->phone }}" target="_blank" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Hubungi Pelanggan</a>
+                                            </li>
+                                            @if ($order->status == 'Dikonfirmasi' && $order->payment_proof != null)
+                                            <li>
+                                                <a href="#" id="order-{{ $order->id }}-modal-payment" data-modal-toggle="order-{{ $order->id }}-modal-payment" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Bukti Pembayaran</a>
+                                            </li>
+                                            @endif
+                                            @if ($order->status == 'Menunggu konfirmasi')
                                             <li>
                                                 <form action="/dashboard/orders/{{ $order->id }}/confirm" method="post">
                                                     @method('put')
@@ -74,14 +91,29 @@
                                                     <button type="submit" class="block text-start w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Konfirmasi Pesanan</button>
                                                 </form>
                                             </li>
-                                            @elseif ($order->status == '1' && $order->payment_proof != null)
+                                            @elseif ($order->status == 'Dikonfirmasi')
                                             <li>
-                                                <a href="#" id="order-{{ $order->id }}-modal-payment" data-modal-toggle="order-{{ $order->id }}-modal-payment" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lihat Bukti Pembayaran</a>
+                                                <form action="/dashboard/orders/{{ $order->id }}/process" method="post">
+                                                    @method('put')
+                                                    @csrf
+                                                    <button type="submit" class="block text-start w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses Pesanan</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="order-{{ $order->id }}-modal-price" data-modal-toggle="order-{{ $order->id }}-modal-price" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Masukan Harga</a>
+                                            </li>
+                                            @elseif ($order->status == 'Sedang diproses')
+                                            <li>
+                                                <form action="/dashboard/orders/{{ $order->id }}/complete" method="post">
+                                                    @method('put')
+                                                    @csrf
+                                                    <button type="submit" class="block text-start w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesaikan Pesanan</button>
+                                                </form>
                                             </li>
                                             @endif                                                                           
                                         </ul>
                                         <div class="py-1">
-                                            @if ($order->status == 0 || ($order->status == 1 && $order->payment_proof === null))
+                                            @if ($order->status == 'Menunggu konfirmasi')
                                                 <form class="delete-form" action="/dashboard/orders/{{ $order->id }}" method="post">
                                                     @method('delete')
                                                     @csrf
@@ -128,6 +160,9 @@
                                                 <p class="mb-2">
                                                     Detail pesanan : {{ $order->desc }}
                                                 </p>
+                                                <p class="mb-2 font-bold">
+                                                    Total harga : Rp. {{ number_format($order->price, 0, ',', '.') }}
+                                                </p>
                                             </p>
                                         </div>
                                     </div>
@@ -157,6 +192,43 @@
                                         <!-- Modal body -->
                                         <div class="mb-6 text-gray-900 dark:text-gray-100">
                                             <img src="{{ asset('storage/' . $order->payment_proof) }}" alt="Bukti Pembayaran" class="w-full h-auto object-cover rounded-lg">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="order-{{ $order->id }}-modal-price" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                                <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+                                    <!-- Modal content -->
+                                    <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                        <!-- Modal header -->
+                                        <div class="flex justify-between mb-4 rounded-t sm:mb-5">
+                                            <div class="text-lg text-gray-900 md:text-xl dark:text-white">
+                                                <h3 class="font-semibold ">
+                                                    Masukan Harga
+                                                </h3>
+                                                <p class="font-bold">
+                                                    {{ $order->invoice  }}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="order-{{ $order->id }}-modal-price">
+                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="mb-6 text-gray-900 dark:text-gray-100">
+                                            <form action="/dashboard/orders/{{ $order->id }}/price" method="post">
+                                                @method('put')
+                                                @csrf
+                                                <div class="mb-5">
+                                                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
+                                                    <input type="number" id="price" name="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" required />
+                                                </div>
+                                                <p id="helper-text-explanation" class="mt-2 mb-2 text-sm text-gray-500 dark:text-gray-400">*Pastikan harga yang dimasukan sudah benar.</p>
+                                                <button type="submit" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
