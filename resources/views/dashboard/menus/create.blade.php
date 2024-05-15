@@ -28,7 +28,7 @@
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
                             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama menu</label>
-                            <input type="text" name="title" id="title" class="@error('title') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <input type="text" name="title" id="title" class="@error('title') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
                             @error ('title')
                                 <div class="mt-1 text-sm text-red-600 dark:text-red-500">
                                     <span class="font-medium">Oops!</span> {{ $message }}
@@ -37,7 +37,7 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
-                            <input type="text" name="slug" id="slug" class="@error('slug') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly>
+                            <input type="text" name="slug" id="slug" class="@error('slug') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" readonly>
                             @error ('slug')
                                 <div class="mt-1 text-sm text-red-600 dark:text-red-500">
                                     <span class="font-medium">Oops!</span> {{ $message }}
@@ -46,7 +46,7 @@
                         </div>
                         <div>
                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select id="category" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
                                 @if ($categories->count() === 0)
                                     <option value="" disabled selected>Tidak ada kategori</option>
                                 @else
@@ -68,7 +68,7 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label for="desc" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
-                            <input type="text" name="desc" id="desc" class="@error('desc') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <input type="text" name="desc" id="desc" class="@error('desc') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500">
                             @error ('desc')
                                 <div class="mt-1 text-sm text-red-600 dark:text-red-500">
                                     <span class="font-medium">Oops!</span> {{ $message }}
@@ -77,7 +77,7 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                            <textarea id="body" name="body" class="@error('body') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                            <textarea id="body" name="body" class="@error('body') border-red-500 @else border-gray-300 @enderror bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500"></textarea>
                             @error ('body')
                                 <div class="mt-1 text-sm text-red-600 dark:text-red-500">
                                     <span class="font-medium">Oops!</span> {{ $message }}
@@ -109,40 +109,54 @@
     document.getElementById('sendMenus').addEventListener('click', function(event) {
         event.preventDefault(); // Menghentikan pengiriman form default
 
-        // Validasi form disini sesuai kebutuhan Anda
-        var title = document.getElementById('title').value;
-        var slug = document.getElementById('slug').value;
-        var desc = document.getElementById('desc').value;
-        var image = document.getElementById('image').value;
-        var error = false;
+            // Validasi form disini sesuai kebutuhan Anda
+            var title = document.getElementById('title').value;
+            var slug = document.getElementById('slug').value;
+            var desc = document.getElementById('desc').value;
+            var image = document.getElementById('image').value;
+            var error = false;
 
-        // Contoh validasi sederhana, ubah sesuai kebutuhan
-        if (title === '') {
-            error = true;
-        }
-        if (slug === '') {
-            error = true;
-        }
-        if (desc === '') {
-            error = true;
-        }
-        if (image === '') {
-            error = true;
-        }
+            // Contoh validasi sederhana, ubah sesuai kebutuhan
+            if (title === '') {
+                error = true;
+            }
+            if (slug === '') {
+                error = true;
+            }
+            if (desc === '') {
+                error = true;
+            }
+            if (image === '') {
+                error = true;
+            }
 
-        if (error) {
-            // Jika ada error, tampilkan Sweet Alert error
+            if (error) {
+                // Jika ada error, tampilkan Sweet Alert error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Pastikan semua kolom terisi dengan benar!",
+                });
+            } else {
+                // Submit form secara manual
+                this.form.submit();
+            }
+        });
+    });
+
+    document.getElementById('image').addEventListener('change', function() {
+        const file = this.files[0];
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+        if (!allowedExtensions.exec(file.name)) {
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Pastikan semua kolom terisi dengan benar!",
+                title: "Error",
+                text: "File yang diunggah harus berupa gambar (JPG, JPEG, PNG, GIF)",
+                icon: "error"
             });
-        } else {
-            // Submit form secara manual
-            this.form.submit();
+            this.value = null;
         }
     });
-});
 
 </script>
 

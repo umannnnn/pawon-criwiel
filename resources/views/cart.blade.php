@@ -265,6 +265,39 @@
         });
     });
 
+    const deleteForms = document.querySelectorAll('.delete-form');
+
+        deleteForms.forEach(deleteForm => {
+            deleteForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger"
+                    },
+                    buttonsStyling: true
+                });
+
+                swalWithBootstrapButtons.fire({
+                    title: "Apakah anda yakin?",
+                    text: "Anda tidak akan dapat mengembalikannya!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Ya, hapus!",
+                    cancelButtonText: "Tidak, batalkan!",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Here you can put your AJAX request or form submission if you want to handle it separately
+                        deleteForm.submit(); // Submit form after confirmation
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        // Do nothing if the user cancels
+                    }
+                });
+            });
+        });
+
     document.addEventListener("DOMContentLoaded", function() {
         // Fungsi untuk menampilkan pesanan berdasarkan status
         function filterOrders(status) {

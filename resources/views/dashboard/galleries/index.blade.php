@@ -185,9 +185,22 @@
                 }
             }
         };
-
         // Call the function to display error message or success message
         displayMessage();
+    });
+
+    document.getElementById('image').addEventListener('change', function() {
+        const file = this.files[0];
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+        if (!allowedExtensions.exec(file.name)) {
+            Swal.fire({
+                title: "Error",
+                text: "File yang diunggah harus berupa gambar (JPG, JPEG, PNG, GIF)",
+                icon: "error"
+            });
+            this.value = null;
+        }
     });
 
     // Function to handle image preview
@@ -207,8 +220,8 @@
         };
 
         reader.readAsDataURL(file);
-        
     });
+
 </script>
 
 @endsection

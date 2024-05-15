@@ -27,11 +27,12 @@ class OrderController extends Controller
         // Validate the request
         $validatedData = $request->validate([
             'product' => 'required|min:3|max:255',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required|numeric|min:1',
             'name' => 'required|min:3|max:255',
             'customer' => 'required|min:3|max:255',
             'address' => 'required|min:3|max:255',
-            'phone' => 'required|min:3|max:13',
+            'desc' => 'required|min:3|max:255',
+            'phone' => 'required|numeric|min:10',
             'desc' => 'required|min:3|max:255'
         ]);
 

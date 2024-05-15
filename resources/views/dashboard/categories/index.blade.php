@@ -39,14 +39,14 @@
                                     @csrf
                                     <div class="mb-5">
                                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama kategori</label>
-                                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" required />
+                                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" />
                                     </div>
                                     <div class="mb-5">
                                         <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
-                                        <input type="text" id="slug" name="slug" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" readonly required />
+                                        <input type="text" id="slug" name="slug" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" readonly />
                                     </div>
                                     <p id="helper-text-explanation" class="mt-2 mb-2 text-sm text-gray-500 dark:text-gray-400">*Pastikan nama dan slug kategori sudah benar.</p>
-                                    <button type="submit" id="sendCategories" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
+                                    <button type="submit" id="createCategory" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -290,6 +290,42 @@
         // Call the function to display error message or success message
         displayMessage();
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('createCategory').addEventListener('click', function(event) {
+        event.preventDefault(); // Menghentikan pengiriman form default
+
+            // Validasi form disini sesuai kebutuhan Anda
+            var name = document.getElementById('name').value; // Menggunakan 'name' sebagai variabel untuk mengambil nilai input 'name'
+            var slug = document.getElementById('slug').value;
+            var error = false;
+
+            // Contoh validasi sederhana, ubah sesuai kebutuhan
+            if (name === '') {
+                error = true;
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Pastikan semua kolom terisi dengan benar!",
+                });
+            }
+
+            if (slug === '') {
+                error = true;
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Pastikan semua kolom terisi dengan benar!",
+                });
+            }
+
+            if (!error) {
+                // Submit form secara manual jika tidak ada error
+                this.closest('form').submit(); // Menggunakan closest('form') untuk menemukan form terdekat dan submit
+            }
+        });
+    });
+
 </script>
 
 @endsection
