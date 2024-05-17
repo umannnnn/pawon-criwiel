@@ -39,16 +39,20 @@ class AdminUserController extends Controller
             'password' => 'required|min:8',
         ]);
 
+        $existingUser = User::where('email', $validatedData['email'])->first();
+
+        if ($existingUser) {
+            return redirect('/dashboard/users')->with('error', 'Email tersebut sudah digunakan.');
+        }
+
         // Tambahkan 'is_admin' ke dalam data yang divalidasi
         $validatedData['is_admin'] = 1;
 
-        // Hash password sebelum menyimpan ke database
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        // Buat pengguna baru dengan data yang telah divalidasi
         User::create($validatedData);
 
-        return redirect('/dashboard/users')->with('success', 'Admin baru berhasil ditambahkan.');
+        return redirect('/dashboard/users')->with('success', 'Admin berhasil ditambahkan.');
     }
 
     /**

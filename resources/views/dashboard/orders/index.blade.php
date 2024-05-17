@@ -102,6 +102,12 @@
                                             <li>
                                                 <a href="#" id="order-{{ $order->id }}-modal-price" data-modal-toggle="order-{{ $order->id }}-modal-price" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Masukan Harga</a>
                                             </li>
+                                            <li>
+                                                <form action="/dashboard/orders/{{ $order->id }}/sendEmail" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="block text-start w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Kirim detail pesanan</button>
+                                                </form>
+                                            </li>
                                             @elseif ($order->status == 'Sedang diproses')
                                             <li>
                                                 <form action="/dashboard/orders/{{ $order->id }}/complete" method="post">

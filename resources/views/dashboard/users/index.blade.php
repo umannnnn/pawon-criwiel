@@ -48,7 +48,7 @@
                                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                         <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" placeholder="Password minimal 8 karakter" />
                                     </div>
-                                    <button type="submit" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Tambah</button>
+                                    <button type="submit" id="createUser" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Tambah</button>
                                 </form>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                                         <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500" placeholder="Password minimal 8 karakter" />
                                                     </div>
-                                                    <button type="submit" id="sendCategories" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
+                                                    <button type="submit" class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -232,7 +232,7 @@
         });
 
         // Function to handle displaying error message if any
-        const displayMessage = () => {
+        const displayErrorMessage = () => {
             const errorMessage = "{{ session('error') }}"; // Fetch error message from session
 
             if (errorMessage) {
@@ -256,7 +256,42 @@
         };
 
         // Call the function to display error message or success message
-        displayMessage();
+        displayErrorMessage();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('createUser').addEventListener('click', function(event) {
+        event.preventDefault(); // Menghentikan pengiriman form default
+
+            // Validasi form disini sesuai kebutuhan Anda
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var error = false;
+
+            // Contoh validasi sederhana, ubah sesuai kebutuhan
+            if (name === '') {
+                error = true;
+            }
+            if (email === '') {
+                error = true;
+            }
+            if (password === '') {
+                error = true;
+            }
+
+            if (error) {
+                // Jika ada error, tampilkan Sweet Alert error
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Pastikan semua kolom terisi dengan benar!",
+                });
+            } else {
+                // Submit form secara manual
+                this.form.submit();
+            }
+        });
     });
 </script>
 

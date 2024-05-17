@@ -66,15 +66,24 @@ class AdminCategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $validateData = $request->validate([
+        // Validasi form
+        $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|unique:categories'
+            'slug' => 'required|unique:categories,slug,'.$category->id,
         ]);
 
-        $category->update($validateData);
+        // Memeriksa apakah ada perubahan pada data
+        if ($validatedData['name'] == $category->name && $validatedData['slug'] == $category->slug) {
+            return redirect()->back()->with('error', 'Tidak ada perubahan yang dilakukan.');
+        }
+
+        // Proses update data jika ada perubahan
+        $category->update($validatedData);
 
         return redirect('/dashboard/categories')->with('success', 'Kategori berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

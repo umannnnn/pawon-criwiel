@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Barryvdh\DomPDF\PDF;
+use App\Mail\MailOrderUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOrderController extends Controller
 {
@@ -75,6 +77,18 @@ class AdminOrderController extends Controller
         // Redirect atau berikan respon sesuai kebutuhan Anda
         return redirect('/dashboard/orders')->with('success', 'Harga pesanan berhasil diubah.');
     }
+
+    //kirim detail pesanan id tersebut ke email pengguna
+    public function sendEmail($id)
+    {
+        $order = Order::findOrFail($id);
+
+        Mail::to($order->customer)->send(new MailOrderUser($order));
+
+        // Redirect atau berikan respon sesuai kebutuhan Anda
+        return redirect('/dashboard/orders')->with('success', 'Email berhasil dikirim.');
+    }
+
 
     public function print()
     {

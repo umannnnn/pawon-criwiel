@@ -94,6 +94,7 @@ Route::put('/order/{order}/confirm', [OrderController::class, 'confirm']);
 
 Route::get('/dashboard/orders', [AdminOrderController::class, 'index'])->middleware('isAdmin');
 Route::get('/dashboard/orders/print', [AdminOrderController::class, 'print'])->name('orders.print')->middleware('isAdmin');
+Route::post('/dashboard/orders/{order}/sendEmail', [AdminOrderController::class, 'sendEmail'])->middleware('isAdmin');
 Route::put('/dashboard/orders/{order}/confirm', [AdminOrderController::class, 'confirm'])->middleware('isAdmin');
 Route::put('/dashboard/orders/{order}/process', [AdminOrderController::class, 'process'])->middleware('isAdmin');
 Route::put('/dashboard/orders/{order}/complete', [AdminOrderController::class, 'complete'])->middleware('isAdmin');
