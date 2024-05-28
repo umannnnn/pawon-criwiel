@@ -131,8 +131,8 @@
 
 <section class="bg-white dark:bg-gray-900">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:px-12 sm:text-center lg:py-16">
-        <h2 class="mb-4 text-4xl font-abc tracking-tight font-extrabold text-gray-900 dark:text-white">Penampilan dari makanan</h2>
-        <p class="font-light mb-5 text-gray-500 sm:text-lg md:px-20 lg:px-38 xl:px-48 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro voluptates cupiditate natus reiciendis unde cumque, ad aliquam fugit accusantium possimus.</p>
+        <h2 class="mb-4 text-4xl font-abc tracking-tight font-extrabold text-gray-900 dark:text-white">Tampilan makanan pilihan anda</h2>
+        <p class="font-light mb-5 text-gray-500 sm:text-lg md:px-20 lg:px-38 xl:px-48 dark:text-gray-400">Inilah Sejumlah Gambar yang Memperlihatkan Secara Menarik Penampilan Makanan Pilihan Anda
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             @if($menu->image)
                 @php
@@ -150,7 +150,7 @@
     <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-12">
         <div class="max-w-screen-md mb-8 lg:mb-16">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white font-abc">Pilihan Menu Lainya</h2>
-            <p class="text-gray-500 sm:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, quo cupiditate accusamus autem minus consectetur, quis sit, temporibus sapiente perferendis</p>
+            <p class="text-gray-500 sm:text-xl dark:text-gray-400">Terdapat beberapa rekomenasi menu lainya yang bisa anda pilih. Silahkan pilih menu yang anda inginkan.</p>
         </div>
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             @foreach($additionalMenus as $additionalMenu)

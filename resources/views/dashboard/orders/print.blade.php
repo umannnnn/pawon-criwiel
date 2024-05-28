@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <h1>Data Pesanan</h1>
+    <h1>Laporan Pesanan</h1>
     <table>
         <thead>
             <tr>

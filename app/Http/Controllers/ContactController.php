@@ -27,7 +27,7 @@ class ContactController extends Controller
         ]);
 
         Message::create($data);
-        Mail::to('pawoncriwiel@gmail.com')->send(new ContactUs($data));
+        Mail::to('jokitiktok001@gmail.com')->send(new ContactUs($data));
 
         // dd('Email sent');
 

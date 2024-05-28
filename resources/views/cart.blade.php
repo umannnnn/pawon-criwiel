@@ -26,6 +26,12 @@
                     </a>
                 </li>
                 <li class="me-3">
+                    <a href="#" id="tab-sedang-diproses" class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                        <!-- SVG icon -->
+                        Sedang Diproses
+                    </a>
+                </li>
+                <li class="me-3">
                     <a href="#" id="tab-selesai" class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                         <!-- SVG icon -->
                         Selesai

@@ -18,7 +18,7 @@ html{
 }
 
 .bg-image {
-    background-image: url("http://source.unsplash.com/1920x1080?background-black");
+    background-image: url("/public/img/bgBlack.jpg");
     background-attachment: fixed;
 }
 

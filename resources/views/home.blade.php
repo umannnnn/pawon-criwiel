@@ -19,12 +19,12 @@
         <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold font-abc text-gray-900 dark:text-white">Pawon Criwiel Catering</h2>
-                <p class="mb-4 font-sans text-justify">Pawon Criwiel Catering menawarkan sebuah perjalanan kuliner yang tak terlupakan, menyajikan harmoni antara kekayaan rasa tradisional dan sentuhan modern dalam setiap hidangannya. Dengan dedikasi tinggi terhadap kualitas dan inovasi, kami berkomitmen untuk menghadirkan momen istimewa di setiap suapan.</p>
-                <p class="font-sans text-justify">Di Pawon Criwiel Catering, setiap hidangan kami adalah kisah, dipersembahkan dengan hati dan keahlian. Kami mengundang Anda untuk menjelajahi lebih dalam cerita di balik cita rasa kami yang luar biasa...</p>
+                <p class="mb-4 font-sans text-justify">Pawon Criwiel Catering menyajikan perpaduan rasa tradisional dan sentuhan modern dalam setiap hidangan. Kami berkomitmen untuk menghadirkan kualitas dan inovasi di setiap kesempatan.</p>
+                <p class="font-sans text-justify">Di Pawon Criwiel Catering, setiap hidangan memiliki cerita tersendiri. Kami mengundang Anda untuk menikmati cita rasa kami yang unik dan istimewa.</p>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
-                <img class="w-full rounded-lg" src="http://source.unsplash.com/592x822?makanan_indonesia" alt="office content 1">
-                <img class="mt-4 w-full lg:mt-10 rounded-lg" src="http://source.unsplash.com/592x822?makanan" alt="office content 2">
+                <img class="w-full rounded-lg" src="/img/home1.jpg" alt="office content 1">
+                <img class="mt-4 w-full lg:mt-10 rounded-lg" src="/img/home2.jpg" alt="office content 2">
             </div>
         </div>
     </section>

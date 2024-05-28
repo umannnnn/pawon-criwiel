@@ -47,7 +47,7 @@ class OrderController extends Controller
         // Update the order with the generated invoice number
         $order->update(['invoice' => $invoiceNumber]);
 
-        Mail::to('pawoncriwiel@gmail.com')->send(new MailOrder($order));
+        Mail::to('jokitiktok001@gmail.com')->send(new MailOrder($order));
 
         // Redirect to order page
         return redirect('/menu')->with('success', 'Pesanan berhasil dibuat, silahkan tunggu konfirmasi dari kami. Nomor invoice Anda: ' . $invoiceNumber);
